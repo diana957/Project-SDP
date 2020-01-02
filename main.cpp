@@ -1,5 +1,5 @@
 #include <iostream>
-#include "Company.h"
+#include "Menu.h"
 
 using std::cout;
 using std::cerr;
@@ -10,23 +10,9 @@ int main(int argc, char* argv[]) {
 		return -1;
 	}
 
+	Menu menu;
+	menu.readFromFile(argv[1]);
+	menu.menu();	
 	
-	Company company;
-	company.readFromFile(argv[1]);
-	company.dissmiss("Dragomir");
-	company.allSubordinates("Pesho");
-	cout << "---------------------\n";
-	company.allSubordinates("Pesho");
-	cout << "------------------\n";
-	company.allSubordinates("Smurkjkj");
-	cout << "-------------------------\n";
-	Employee emp("Genadi", 3, 22);
-	company.add(emp, "Sashko", "without");
-	company.allSubordinates("Stavri");
-	cout << "-----------------\n";
-	company.dissmiss("Stoimenka");
-	company.allSubordinates("Pesho");
-	
-	system("pause");
 	return 0;
 }
