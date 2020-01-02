@@ -17,6 +17,11 @@ unsigned Employee::getAge()const {
 	return age;
 }
 
-bool Employee::checkPerson(unsigned age)const {
-	return (age >= 18 && age < 60) ? true : false;
+bool Employee::checkEmployee()const {
+	if (age >= 18 && age <= 65) {
+		if (practice < age) return true;
+		return false;
+	 }
+
+	return false;
 }
