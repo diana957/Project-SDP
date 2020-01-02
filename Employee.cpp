@@ -5,6 +5,12 @@ Employee::Employee(const string& name, unsigned practice, unsigned age)
 	, practice(practice)
 	, age(age) {}
 
+void Employee::set(const string& name, unsigned practice, unsigned age){
+	this->name = name;
+	this->practice = practice;
+	this->age = age;
+}
+
 const string& Employee::getName()const {
 	return name;
 }
