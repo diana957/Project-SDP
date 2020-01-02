@@ -30,6 +30,11 @@ public:
 public:
 	void add(const Employee& employee, const string& boss, const string& how);
 	void dissmiss(const string& employee);
+	void newRank(const string& employee);
+
+public:
+	void directSubordinates(const string& employee)const;
+	void directBoss(const string& employee)const;
 	void allSubordinates(const string& employee)const;
 
 private:
@@ -43,6 +48,7 @@ private:
 	Employees* highestHeight(Employees *rootBoss)const;
 	unsigned height(Employees *rootBoss)const;
 	unsigned indexBoss(Employees *parent, Employees *rootBoss)const;
+	void swapWithLast(Employees *rootBoss, Employees *parent);
 
 private:
 	void clear(Employees *&root);
