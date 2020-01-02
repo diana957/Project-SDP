@@ -12,7 +12,7 @@ public:
 	const string& getName()const;
 	unsigned getPractice()const;
 	unsigned getAge()const;
-	bool checkPerson(unsigned age)const;
+	bool checkPerson()const;
 
 private:
 	void operator=(const Employee&) {}
