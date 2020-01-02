@@ -96,6 +96,64 @@ void Company::dissmiss(const string& employee) {
 	else dissmissWithSurbodinate(rootBoss);
 }
 
+void Company::newRank(const string& employee) {
+	if (isBoss(employee)) {
+		cerr << "Cannot raise Boss!\n";
+		return;
+	}
+
+	Employees *rootBoss = correspondPtr(employee);
+	if (!rootBoss) {
+		cerr << "Cannot dismiss this Employee.\n";
+		return;
+	}
+	
+	Employees *parent = findParent(rootBoss);
+	if (isBoss(parent->employee.getName())) {
+		cerr << "Cannot raise this employee because their post is at the highest level.\n";
+		return;
+	}
+
+	Employees *newParent = findParent(parent);
+
+	newParent->children.push_back(rootBoss);
+	swapWithLast(rootBoss, parent);
+}
+
+void Company::directSubordinates(const string& employee)const {
+	const Employees *rootBoss = correspondPtr(employee);
+	if (!rootBoss) {
+		cerr <<"This Employee doesn't exist.\n";
+		return;
+	}
+
+	if (rootBoss->children.empty()) 
+		cout << "This person doesn't have subordinates.\n";
+	
+
+	for (size_t i = 0; i < rootBoss->children.size(); ++i) {
+		cout << rootBoss->children[i]->employee.getName() << "  "
+			<< rootBoss->children[i]->employee.getPractice() << " "
+			<< rootBoss->children[i]->employee.getAge() << "\n";
+	}
+}
+
+void Company::directBoss(const string& employee)const {
+	Employees *rootBoss = correspondPtr(employee);
+	if (!rootBoss) {
+		cerr << "This Employee doesn't exist.\n";
+		return;
+	}
+
+	Employees *parent = findParent(rootBoss);
+	if (!parent) 
+		cout << "This is the main boss. They don't have a boss\n";
+	else
+		cout << parent->employee.getName() << "  "
+			<< parent->employee.getPractice() << "  "
+			<< parent->employee.getAge() << "\n";
+}
+
 void Company::allSubordinates(const string& employee)const {
 	const Employees *rootBoss = correspondPtr(employee);
 	if (!rootBoss) {
@@ -255,6 +313,12 @@ unsigned Company::indexBoss(Employees *parent, Employees *rootBoss)const {
 	return -1;
 }
 
+void Company::swapWithLast(Employees *rootBoss, Employees *parent) {
+	unsigned index = indexBoss(parent, rootBoss);
+	if(index != (parent->children.size() - 1))
+		parent->children[index] = parent->children[parent->children.size() - 1];
+	parent->children.pop_back();
+}
 
 void Company::clear(Employees *&root) {
 	if (!root)
