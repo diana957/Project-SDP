@@ -88,10 +88,7 @@ void Company::dissmiss(const string& employee) {
 
 	if (rootBoss->children.empty()) {
 		Employees *parent = findParent(rootBoss);
-		unsigned index = indexBoss(parent, rootBoss);
-		if (index != (parent->children.size() - 1))
-			parent->children[index] = parent->children[parent->children.size() - 1];
-		parent->children.pop_back();
+		swapWithLast(rootBoss, parent);
 	}
 	else dissmissWithSurbodinate(rootBoss);
 }
