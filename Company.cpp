@@ -49,6 +49,11 @@ void Company::readFromFile(const string& path) {
 }
 
 void Company::add(const Employee& employee, const string& boss, const string& how) {
+	if (!employee.checkEmployee()) {
+		cerr << "This Employee cannot be hired because of unappropriate age or practice.\n";
+		return;
+	}
+	
 	if (!nameRegister.addToRegister(employee.getName())) {
 		cerr << "Cannot hire this employee. Already exits.\n";
 		return;
