@@ -9,6 +9,7 @@ public:
 	Employee(const string& name, unsigned practice, unsigned age);
 
 public:
+	void set(const string& name, unsigned practice, unsigned age);
 	const string& getName()const;
 	unsigned getPractice()const;
 	unsigned getAge()const;
